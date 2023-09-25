@@ -1,10 +1,7 @@
-numpy
-pandas
-streamlit
-scipy
-chart_studio.plotly 
-plotly.express
-plotly.graph_objects
-plotly.figure_factory
-chart_studio
-plotly.subplots
+numpy==1.24.3
+pandas==1.5.3
+streamlit==1.26.0
+scipy==1.10.1
+plotly==5.16.1
+chart_studio==1.1.0
+
