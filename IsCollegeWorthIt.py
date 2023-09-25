@@ -20,7 +20,8 @@ st.subheader('Only 55% of male high school graudates enrolled in college the fol
 # Enrollment data for males, females, and total from 1960 till 2021
 
 # Load the College Enrollment Data
-enrollment = pd.read_csv('./CollegeEnrollment.csv')
+file1 = './CollegeEnrollment.csv'
+enrollment = pd.read_csv(file1)
 
 # Create Streamlit checkboxes to choose columns
 labels = ['Total', 'Male', 'Female']
@@ -145,9 +146,9 @@ st.write('The data analysis of 30,000 bachelor’s degree programs at 1,775 coll
 
 st.subheader('The lifetime return on investment is very small or even negative for some programs.')
 
-
 # Load the ROI Data
-roi = pd.read_csv('./ROI.csv')
+file2 = './ROI.csv'
+roi = pd.read_csv('file2')
 
 roi['Age at which ROI turns positive'] = roi['Age at which ROI turns positive'].replace(999, 70)
 
