@@ -1,3 +1,10 @@
 numpy
 pandas
 streamlit
+scipy
+chart_studio.plotly 
+plotly.express
+plotly.graph_objects
+plotly.figure_factory
+chart_studio
+plotly.subplots
