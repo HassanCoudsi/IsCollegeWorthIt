@@ -22,7 +22,7 @@ st.header('2.7M students graduated high school in 2021. Only 1.7M joined college
 # Enrollment data for males, females, and total from 1960 till 2021
 
 # Load the College Enrollment Data
-# enrollment = pd.read_csv('/Users/hassancoudsi/Documents/AUB/MSBA/325Visualization/Streamlit_Assignment/CollegeEnrollment.csv')
+#enrollment = pd.read_csv('/Users/hassancoudsi/Documents/AUB/MSBA/325Visualization/Streamlit_Assignment/CollegeEnrollment.csv')
 
 # Load the College Enrollment Data (github)
 file1 = './CollegeEnrollment.csv'
