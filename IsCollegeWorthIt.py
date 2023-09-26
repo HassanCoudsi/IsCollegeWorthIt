@@ -12,14 +12,19 @@ from plotly.subplots import make_subplots
 # Is College Worth it?
 
 st.title('Is College Worth it?')
-st.header('2.7M students graduated high school in 2021. Only 1.7M joined college next fall.' ,divider='violet')
-st.subheader('1M students finished high school but chose not to join college in 2021.')
-st.subheader('62% of high school graduates enrolled in college next fall in 2021. We are back to 1992 level.')
-st.subheader('Only 55% of male high school graudates enrolled in college the following fall in 2021. We are back to the 1960 level.')
+st.header('Data suggests that recent high school graduates don\'t think it is.')
+st.write('This work is based on the following article: https://freopp.org/is-college-worth-it-a-comprehensive-return-on-investment-analysis-1b2ad17f84c8')
+
+st.header('2.7M students graduated high school in 2021. Only 1.7M joined college the next fall.' ,divider='violet')
+
+
 
 # Enrollment data for males, females, and total from 1960 till 2021
 
 # Load the College Enrollment Data
+# enrollment = pd.read_csv('/Users/hassancoudsi/Documents/AUB/MSBA/325Visualization/Streamlit_Assignment/CollegeEnrollment.csv')
+
+# Load the College Enrollment Data (github)
 file1 = './CollegeEnrollment.csv'
 enrollment = pd.read_csv(file1)
 
@@ -136,17 +141,31 @@ fig.update_layout()
 # Display the Plotly figure using st.plotly_chart
 st.plotly_chart(fig)
 
+st.markdown('<span style="color: #EC516E; font-size: 24px;">1M students finished high school but chose not to join college in 2021.</span>', unsafe_allow_html=True)
+st.markdown('<span style="color: #EC516E; font-size: 24px;">62% of high school graduates enrolled in college the next fall in 2021. We are back to 1992 level.</span>', unsafe_allow_html=True)
+st.markdown('<span style="color: #EC516E; font-size: 24px;">Only 55% of male high school graudates enrolled in college the following fall in 2021. We are back to the 1960 level..</span>', unsafe_allow_html=True)
+
+
+st.write("")
+st.write("")
+st.write("")
+
 # ROI Charts
 
 # ROI by Program Category
 
-st.title('College is still worth it but not for all programs of study and not all universities')
-st.write('The data analysis of 30,000 bachelor’s degree programs at 1,775 colleges and universities across the United States reveals new insights.')
+st.title('Is College Worth it? It Depends!')
+st.header('What Does ROI Analysis Say?')
+st.markdown('<span style="color: #6371E0; font-size: 32px;">Return on Investment (ROI) of a college degree is the increase in lifetime earnings a student can expect from that degree, minus the direct and indirect costs of college.</span>', unsafe_allow_html=True)
+st.write('The graphs below are based on the analysis of 30,000 bachelor’s degree programs at 1,775 colleges and universities across the United States reveals new insights.')
 
+st.subheader('Let us group all college programs (majors) under 17 categories and examine the ROI for each program category.')
 
-st.subheader('The lifetime return on investment is very small or even negative for some programs.')
 
 # Load the ROI Data
+#roi = pd.read_csv('/Users/hassancoudsi/Documents/AUB/MSBA/325Visualization/Streamlit_Assignment/ROI.csv')
+
+# Load the ROI Data (Github)
 file2 = './ROI.csv'
 roi = pd.read_csv(file2)
 
@@ -175,9 +194,17 @@ fig1.update_traces(marker_color=['red' if val < 0 else 'blue' for val in roi_by_
 # Display the figure in Streamlit
 st.plotly_chart(fig1)
 
+
+st.markdown('<span style="color: #EC516E; font-size: 24px;">The lifetime return on investment is very high for engineering and computer science.</span>', unsafe_allow_html=True)
+st.markdown('<span style="color: #EC516E; font-size: 24px;">The lifetime return on investment is nearly zero or negative for Psychology, Philosophy and Religious Studies, and Visual Arts and Music.</span>', unsafe_allow_html=True)
+
+st.write("")
+st.write("")
+st.write("")
+
 # How long does it take to recover the investment
 
-st.subheader('In some programs the student recovers the investment before reaching 30, while in other programs the investment is never recovered before retirement.')
+st.subheader('So, how quickly can the investment in a degree be recovered? It also depends on the major.')
 
 # Create the Plotly Express figure
 fig2 = px.bar(roi_by_program, x='Program Type', y='Age at which ROI turns positive')
@@ -185,9 +212,13 @@ fig2 = px.bar(roi_by_program, x='Program Type', y='Age at which ROI turns positi
 # Display the figure in Streamlit
 st.plotly_chart(fig2)
 
+st.markdown('<span style="color: #EC516E; font-size: 24px;">Engineering and computer science students can recover their investment by the time they reach 30.</span>', unsafe_allow_html=True)
+st.markdown('<span style="color: #EC516E; font-size: 24px;">Philosophy and Religious Studies, and Visual Arts and Music majors will NOT recover their investments before retirement.</span>', unsafe_allow_html=True)
+
+
 # The ranking of the top 10 programs by ROI
 
-st.subheader('So, what are the top 10 programs in terms of life time return on investment?')
+st.subheader('Curious to know the top 10 programs in terms of ROI?')
 
 roi_sorted = roi.sort_values(by='Lifetime return on investment (ROI)', ascending=False)
 top10_programs = roi_sorted[['Institution name', 'Program name', 'Lifetime return on investment (ROI)']].head(10)
@@ -208,9 +239,17 @@ fig3.update_layout(
 
 st.plotly_chart(fig3)
 
+st.markdown('<span style="color: #EC516E; font-size: 24px;">The brand name is important, but the program type is even more important.</span>', unsafe_allow_html=True)
+
+st.write("")
+st.write("")
+st.write("")
+
 # The top 10 universities by ROI 
 
-st.subheader('And what are the top 10 universities in terms of life time return on investment?')
+st.subheader('Let us rank based on institution name across majors and look at the top 10 institutions in terms of ROI.')
+st.markdown('<span style="color: #6371E0; font-size: 32px;">Does the list look like anything you have seen in the rankings?</span>', unsafe_allow_html=True)
+
 #unique_institutions = roi['Institution name'].unique()
 earnings_by_institution = roi.groupby('Institution name')['Lifetime return on investment (ROI)'].mean().reset_index()
 earnings_by_institution_sorted = earnings_by_institution.sort_values(by='Lifetime return on investment (ROI)', ascending=False)
@@ -227,9 +266,19 @@ fig4.update_layout(
     )
 st.plotly_chart(fig4)
 
+st.markdown('<span style="color: #EC516E; font-size: 24px;">Where is Harvard, Princeton, or most of the Ivy Leagues?</span>', unsafe_allow_html=True)
+
+st.write("")
+st.write("")
+st.write("")
+
+
 # ROI correlation with cost and admissions 
 
 st.subheader('Is ROI correlated with cost or admissions rate?')
+
+st.markdown('<span style="color: #6371E0; font-size: 32px;">Are more expensive schools worth it?</span>', unsafe_allow_html=True)
+st.markdown('<span style="color: #6371E0; font-size: 32px;">We will use the average net price all students pay after financial aid, not the sticker price published on the school\'s website.</span>', unsafe_allow_html=True)
 
 
 roi_cleaned = roi.dropna(subset=['Admissions rate', 'Annual net tuition cost']).query('`Admissions rate` != 0 and `Annual net tuition cost` != 0')
@@ -250,6 +299,15 @@ fig5 = px.scatter(
 )
 st.plotly_chart(fig5)
 
+st.markdown('<span style="color: #EC516E; font-size: 24px;">When the annual net tuition cost goes up the ROI does NOT go up.</span>', unsafe_allow_html=True)
+
+st.write("")
+st.write("")
+st.write("")
+
+st.markdown('<span style="color: #6371E0; font-size: 32px;">Are more selective schools worth it?</span>', unsafe_allow_html=True)
+
+
 fig6 = px.scatter(
     roi_by_institution,
     x='Admissions rate',
@@ -258,12 +316,19 @@ fig6 = px.scatter(
 )
 st.plotly_chart(fig6)
 
+st.markdown('<span style="color: #EC516E; font-size: 24px;">Unless you go to a highly slective school (less than 15% admissions rate), there seems to be no correlation between school selectivity and ROI.</span>', unsafe_allow_html=True)
+
+st.write("")
+st.write("")
+st.write("")
 
 # Compare earnings with and without a degree for different programs
 
-st.title('Is a Degree worth it?')
-st.subheader('How much more can a person earn if s/he has a degree earn vs if s/he has no degree?')
-st.write('Check different ages. Keep in mind that if somone does not enroll in colege, s/he can start making money earlier.')
+st.title('So, college is worth it but NOT for all majors.')
+st.subheader('How much more money could you expect to earn if you pursue a degree?')
+st.subheader('Choose a program type and an age category and find out for yourself.')
+
+st.write('Keep in mind that if somone does not enroll in colege, s/he can start making money earlier.')
 
 
 unique_programs = roi['Program category'].unique()
@@ -331,3 +396,5 @@ fig = px.bar(filtered_data, x='Program Type', y=f'Estimated earnings, ages {sele
 
 # Show the plot
 st.plotly_chart(fig)
+
+st.write('Would you like to hear more perspectives about this? Check this episode of the Daily podcast from the New York Times: https://www.nytimes.com/2023/09/20/podcasts/the-daily/is-college-worth-it.html')
